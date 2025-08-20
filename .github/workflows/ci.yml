@@ -1,0 +1,31 @@
+# .github/workflows/ci.yml
+name: CI - Build & Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout le code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Installer les dépendances
+        run: npm install
+
+      - name: Lancer la build Next.js
+        run: npm run build
+
+      # Optionnel si tu as des tests
+      # - name: Lancer les tests
+      #   run: npm run test
